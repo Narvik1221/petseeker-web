@@ -15,6 +15,9 @@ export const CardList: React.FC = () => {
   if (error) {
     return <p>{error}</p>;
   }
+  if (cards.length === 0) {
+    return <p>No cards available.</p>;
+  }
   return (
     <div {...stylex.props(styles.cardListContainer)}>
       {cards.map((item) => (

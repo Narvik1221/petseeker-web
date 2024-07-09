@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Card } from "../index";
+import {  useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCards } from "../api/fetchCards";
 import { RootState, AppDispatch } from "../../../app/store";
@@ -21,7 +20,8 @@ export const useCards = () => {
         dispatch(fetchCardsStart());
         try {
           const data = await fetchCards();
-          dispatch(fetchCardsSuccess(data));
+
+          dispatch(fetchCardsSuccess(data.pets));
         } catch (err) {
           dispatch(fetchCardsFailure("Failed to fetch products"));
         }

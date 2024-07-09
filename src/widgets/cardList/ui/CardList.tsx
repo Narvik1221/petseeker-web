@@ -3,9 +3,7 @@ import { Card } from "../../../entities/card";
 import { useCards } from "../../../entities/card";
 import styles from "./card.style";
 import stylex from "@stylexjs/stylex";
-// interface ProductListProps {
-//   onAddToCart: (productId: number) => void;
-// }
+import {SaveCard} from "../../../features/saveCard";
 
 export const CardList: React.FC = () => {
   const { cards, loading, error } = useCards();
@@ -17,11 +15,10 @@ export const CardList: React.FC = () => {
   if (error) {
     return <p>{error}</p>;
   }
-
   return (
     <div {...stylex.props(styles.cardListContainer)}>
       {cards.map((item) => (
-        <Card description={item} />
+        <Card key={item.id} description={item} children={<SaveCard></SaveCard>} />
       ))}
     </div>
   );

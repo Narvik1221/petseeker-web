@@ -1,7 +1,7 @@
 import React from "react";
 
 import { CardList } from "../../widgets/cardList";
-import Container from "../../shared/ui/container/ui";
+import {Container} from "../../shared/ui/container";
 const Home: React.FC = () => {
   return (
     <div>

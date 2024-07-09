@@ -4,9 +4,10 @@ import styles from "./card.style";
 
 export interface Card {
   id: number;
-  userId: number;
-  title: string;
-  body: string;
+  name: string;
+  price: string;
+  geo: string;
+  images?: string[];
 }
 
 interface ICard {
@@ -15,9 +16,17 @@ interface ICard {
 }
 export const Card: React.FC<ICard> = ({ description, children }) => {
   return (
-    <div key={description.id} {...stylex.props(styles.cardContainer)}>
-      <h3>{description.title}</h3>
-      <h3>{description.body}</h3>
+    <div    {...stylex.props(styles.cardContainer)}>
+      <h3>Имя {description.name}</h3>
+      <div>Цена {description.price}</div>
+      <div>Гео {description.geo}</div>
+      <ul {...stylex.props(styles.cardImageContainer)}>
+        {description.images?.map((image,index) => (
+          <li key={index} {...stylex.props(styles.cardImage)}>
+            <img src={image} alt="Фото питомца" />
+          </li>
+        ))}
+      </ul>
       <div>{children}</div>
     </div>
   );

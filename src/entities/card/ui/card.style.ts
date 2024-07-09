@@ -13,7 +13,17 @@ const styles = stylex.create({
   //     backgroundColor: "#0b3c6c",
   //   },
   // },
+  cardImageContainer:{
+      display:"flex",
+      gap:"12px",
+      overflow:"auto"
+  },
+  cardImage:{
+      maxWidth:"200px",
+      aspectRatio: "1",
+  },
   cardContainer: {
+    overflow:"hidden",
     padding:"20px",
     minWidth:"250px",
     maxWidth: "500px",

@@ -30,7 +30,7 @@ const cardSlice = createSlice({
     fetchCardsFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
-      console.log('jib,rf')
+      console.log('ошибка')
     },
   },
 });

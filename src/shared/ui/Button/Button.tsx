@@ -1,13 +1,28 @@
-import React from 'react';
-import * as stylex from '@stylexjs/stylex';
-import styles from './button.style';
+import React from "react";
+import styles from "./button.module.scss";
 type ButtonProps = {
-  onClick: (event:any) => void;
-  children: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  children?: React.ReactNode;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  isDefault?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
-  return <button {...stylex.props(styles.default)} onClick={onClick}>{children}</button>;
+export const Button: React.FC<ButtonProps> = ({
+  onClick,
+  children,
+  type,
+  disabled,
+  isDefault,
+}) => {
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      className={isDefault ? styles.default : styles.active}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
 };
-
-export default Button;

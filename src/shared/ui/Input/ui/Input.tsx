@@ -1,27 +1,14 @@
 import React from "react";
-import * as stylex from '@stylexjs/stylex';
-type FormProps = {
+import styles from "./input.module.scss";
+type InputProps = {
   onChange?: any;
   placeholder?: string;
-  value?: any;
+  value?: string;
   name?: string;
+  style?: any;
+  props?: any;
 };
 
-const Form: React.FC<FormProps> = ({ onChange, value, placeholder, name }) => {
-  return (
-    <div >
-
-      <div >
-        <input
-          name={name}
-          value={value}
-          onChange={onChange}
-          type="text"
-          placeholder={placeholder}
-        />
-      </div>
-    </div>
-  );
+export const Input: React.FC<InputProps> = (props) => {
+  return <input className={styles.default} type="text" {...props} />;
 };
-
-export default Form;

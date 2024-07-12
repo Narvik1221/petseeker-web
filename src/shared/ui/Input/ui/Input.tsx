@@ -1,4 +1,4 @@
-import React from "react";
+import React, {InputHTMLAttributes} from "react";
 import styles from "./input.module.scss";
 type InputProps = {
   onChange?: any;
@@ -6,7 +6,7 @@ type InputProps = {
   value?: string;
   name?: string;
   style?: any;
-  props?: any;
+  props?:InputHTMLAttributes<HTMLInputElement>;
 };
 
 export const Input: React.FC<InputProps> = (props) => {

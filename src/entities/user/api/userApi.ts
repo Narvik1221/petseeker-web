@@ -1,8 +1,8 @@
-// src/entities/user/api.ts
+
 import { baseApi } from "../../../shared/api";
 
 type LoginResponse = {
-  token: string;
+  success: boolean;
 };
 
 type LoginRequest = {
@@ -10,6 +10,16 @@ type LoginRequest = {
   name: string;
 };
 
+
+type ConfirmRequest = {
+  code: string;
+  phoneNumber: string;
+};
+
+type ConfirmResponse = {
+  token: string;
+  success: boolean;
+};
 export const userApi = baseApi.injectEndpoints({
 
   endpoints: (builder) => ({
@@ -20,7 +30,14 @@ export const userApi = baseApi.injectEndpoints({
         body: credentials,
       }),
     }),
+    confirm: builder.mutation<ConfirmResponse, ConfirmRequest>({
+      query: (credentials) => ({
+        url: "/auth/confirm",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = userApi;
+export const { useLoginMutation,useConfirmMutation } = userApi;

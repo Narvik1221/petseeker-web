@@ -1,42 +1,41 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Card } from "../index";
-import { cardsApi } from "../index";
-export type CardState = {
-  cards: Card[];
-  loading: boolean;
-  error: string | null;
-};
+import { Pet } from "../index";
+import { petsApi } from "../index";
+import { PetState } from "../index";
 
-const initialState: CardState = {
-  cards: [],
+const initialState: PetState = {
+  pets: [],
   loading: false,
   error: null,
 };
 
-const cardsSlice = createSlice({
-  name: "cards",
+const petsSlice = createSlice({
+  name: "pets",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(cardsApi.endpoints.getCards.matchPending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
+    builder.addMatcher(petsApi.endpoints.getPets.matchPending, (state) => ({
+      ...state,
+      loading: true,
+      error: null,
+    }));
     builder.addMatcher(
-      cardsApi.endpoints.getCards.matchFulfilled,
-      (state, action: PayloadAction<Card[]>) => {
-        state.cards = action.payload;
-        state.loading = false;
-      }
+      petsApi.endpoints.getPets.matchFulfilled,
+      (state, action: PayloadAction<Pet[]>) => ({
+        ...state,
+        pets: action.payload,
+        loading: false,
+      })
     );
     builder.addMatcher(
-      cardsApi.endpoints.getCards.matchRejected,
-      (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to fetch cards";
-      }
+      petsApi.endpoints.getPets.matchRejected,
+      (state, action) => ({
+        ...state,
+        error: action.error.message || "Failed to fetch cards",
+        loading: false,
+      })
     );
   },
 });
 
-export default cardsSlice.reducer;
+export default petsSlice.reducer;

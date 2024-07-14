@@ -2,15 +2,15 @@ import React, { CSSProperties } from "react";
 import styles from './mainContainer.module.scss'
 type ContainerProps = {
   children?: React.ReactNode;
-  customStyles?: CSSProperties;
+  style?: CSSProperties;
 };
 
 export const MainContainer: React.FC<ContainerProps> = ({
-  customStyles,
+  style,
   children,
 }) => {
 
-  return <div className={styles.container}  style={customStyles}>{children}</div>;
+  return <div className={styles.container}  style={style}>{children}</div>;
 };
 
 

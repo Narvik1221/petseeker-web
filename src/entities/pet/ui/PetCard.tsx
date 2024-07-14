@@ -1,12 +1,14 @@
 import type { FC } from "react";
 import styles from "./petCard.module.scss";
-import { Card } from "../index";
+import { Pet } from "../index";
 
-type CardProps = {
-  description: Card;
-  children?: React.ReactNode;
+type PetProps = {
+  description: Pet;
+  actionSlots?: React.ReactNode;
 };
-export const PetCard: FC<CardProps> = ({ description, children }) => {
+
+
+export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
   return (
     <div className={styles.card__container}>
       <h3>Имя {description.name}</h3>
@@ -20,7 +22,7 @@ export const PetCard: FC<CardProps> = ({ description, children }) => {
             </li>
           ))}
       </ul>
-      <div>{children}</div>
+      <div>{actionSlots}</div>
     </div>
   );
 };

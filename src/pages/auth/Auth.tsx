@@ -1,10 +1,10 @@
 import React from "react";
-import { Auth } from "../../widgets/auth";
+import { AuthWidget } from "../../widgets/authWidget"
 import { MainContainer } from "../../shared/ui/mainContainer";
-export const Login: React.FC = () => {
+export const Auth: React.FC = () => {
   return (
     <MainContainer>
-      <Auth></Auth>
+      <AuthWidget></AuthWidget>
     </MainContainer>
   );
 };

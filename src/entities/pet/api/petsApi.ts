@@ -1,12 +1,11 @@
-import { Card } from "../index";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Pet } from "../index";
 import { baseApi } from '../../../shared/api';
-export const cardsApi = baseApi.injectEndpoints({
+export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getCards: builder.query<Card[], void>({
+    getPets: builder.query<Pet[], void>({
       query: () => "/",
     }),
   }),
 });
 
-export const { useGetCardsQuery } = cardsApi;
+export const { useGetPetsQuery } = petsApi;

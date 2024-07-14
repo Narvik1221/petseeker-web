@@ -1,43 +1,28 @@
-
 import { baseApi } from "../../../shared/api";
+import {
+  LoginResponse,
+  LoginRequest,
+  ConfirmResponse,
+  ConfirmRequest,
+} from "../model/userType";
 
-type LoginResponse = {
-  success: boolean;
-};
-
-type LoginRequest = {
-  phoneNumber: string;
-  name: string;
-};
-
-
-type ConfirmRequest = {
-  code: string;
-  phoneNumber: string;
-};
-
-type ConfirmResponse = {
-  token: string;
-  success: boolean;
-};
 export const userApi = baseApi.injectEndpoints({
-
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginRequest>({
-      query: (credentials) => ({
+      query: (body) => ({
         url: "/auth/login",
         method: "POST",
-        body: credentials,
+        body,
       }),
     }),
     confirm: builder.mutation<ConfirmResponse, ConfirmRequest>({
-      query: (credentials) => ({
+      query: (body) => ({
         url: "/auth/confirm",
         method: "POST",
-        body: credentials,
+        body,
       }),
     }),
   }),
 });
 
-export const { useLoginMutation,useConfirmMutation } = userApi;
+export const { useLoginMutation, useConfirmMutation } = userApi;

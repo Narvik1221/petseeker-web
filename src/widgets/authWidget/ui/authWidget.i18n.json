@@ -1,0 +1,14 @@
+{
+  "authWidget": {
+    "en": {
+      "Login": "Login",
+      "Register": "Register",
+      "AgreeMessage": "By clicking the login button, you accept the terms of the User Agreement and the Privacy Policy"
+    },
+    "ru": {
+      "Login": "Вход",
+      "Register": "Регистрация",
+      "AgreeMessage": "Нажимая кнопку входа, вы принимаете условия Пользовательского соглашения и Политики Конфиденциальности"
+    }
+  }
+}

@@ -2,13 +2,10 @@
 import React, { ChangeEvent } from "react";
 import { Input } from "../../../../shared/ui/Input";
 import { Button } from "../../../../shared/ui/button";
-import { AUTH_ROUTE, REGISTRATION_ROUTE } from "../../../../app/router/consts";
 import styles from "../auth.module.scss";
-import InputMask from "react-input-mask";
-import {
-  phoneConsts,
-  nameConsts,
-} from "../../../../shared/constants";
+import InputMask from "react-input-mask-next";
+import { phoneConsts, nameConsts } from "../../../../shared/constants";
+import { useTranslation } from "react-i18next";
 type AuthFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -19,6 +16,7 @@ type AuthFormProps = {
   isSendingLogin?: boolean;
   isAuth?: boolean;
 };
+
 export const AuthForm: React.FC<AuthFormProps> = ({
   handleClickSubmit,
   handleChangePhone,
@@ -28,24 +26,25 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   name,
   isSendingLogin,
 }) => {
-  const textAuthButton = isAuth ? "Войти" : "Регистрация";
+  const { t } = useTranslation("authForm");
+  const textAuthButton = isAuth ? t("enter") : t("registration");
   return (
     <form className={styles.auth__form}>
       <label className={styles.label}>
-        Номер
+        {t("number")}
         <InputMask
-          placeholder={phoneConsts.placeholder}
-          mask={phoneConsts.mask}
-          maskChar={phoneConsts.maskChar}
-          value={phoneNumber}
           onChange={handleChangePhone}
+          value={phoneNumber}
+          mask={phoneConsts.mask}
+          placeholder={phoneConsts.placeholder}
         >
-          {(inputProps: any) => <Input {...inputProps} />}
+          <Input />
         </InputMask>
       </label>
+
       {!isAuth && (
         <label className={styles.label}>
-          Имя
+          {t("name")}
           <Input
             value={name}
             onChange={handleChangeName}

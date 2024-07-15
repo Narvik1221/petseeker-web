@@ -1,0 +1,16 @@
+{
+  "authForm": {
+    "en": {
+      "number": "Number",
+      "name": "Name",
+      "enter":"Enter",
+      "registration":"Registration"
+    },
+    "ru": {
+      "number": "Номер",
+      "name": "Имя",
+       "enter":"Войти",
+      "registration":"Регистрация"
+    }
+  }
+}

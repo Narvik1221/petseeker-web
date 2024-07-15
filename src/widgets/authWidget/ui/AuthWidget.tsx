@@ -1,5 +1,6 @@
 // src/entities/user/model/authWidget.ts
 import React, { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import {
   useLoginMutation,
   useConfirmMutation,
@@ -19,8 +20,10 @@ import { useNavigate } from "react-router-dom";
 import { Text } from "../../../shared/ui/text";
 import { ConfirmForm } from "./confirmForm/ConfirmForm";
 import { AuthForm } from "./authForm/AuthForm";
-import { match, P } from "ts-pattern";
+import { match } from "ts-pattern";
+
 export const AuthWidget: React.FC = () => {
+  const { t, i18n } = useTranslation("authWidget");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
@@ -30,29 +33,26 @@ export const AuthWidget: React.FC = () => {
   const [login, { isLoading: isSendingLogin }] = useLoginMutation();
   const [confirm, { isLoading: isSendingConfirm }] = useConfirmMutation();
   const isAuth = location.pathname === AUTH_ROUTE;
+
   const handleClickSubmit = async () => {
-    if (phoneNumber.length === 11) {
-      try {
-        const response = await login({ phoneNumber, name }).unwrap();
-        if (response.success) {
-          dispatch(setIsConfirm(true)); // Assuming you add setIsConfirm action
-        }
-      } catch (err) {
-        console.error("Failed to login", err);
+    try {
+      const response = await login({ phoneNumber, name }).unwrap();
+      if (response.success) {
+        dispatch(setIsConfirm(true));
       }
+    } catch (err) {
+      console.error("Failed to login", err);
     }
   };
 
   const handleClickConfirm = async () => {
-    if (phoneNumber.length === 11 && code.length === 6) {
-      try {
-        const response = await confirm({ phoneNumber, code }).unwrap();
-        if (response.success) {
-          dispatch(setToken(response.token));
-        }
-      } catch (err) {
-        console.error("Failed to confirm", err);
+    try {
+      const response = await confirm({ phoneNumber, code }).unwrap();
+      if (response.success) {
+        dispatch(setToken(response.token));
       }
+    } catch (err) {
+      console.error("Failed to confirm", err);
     }
   };
 
@@ -77,16 +77,16 @@ export const AuthWidget: React.FC = () => {
       <h1 className={styles.auth__title}>PetSeeker</h1>
       <div className={styles.auth__top}>
         <Button onClick={() => navigate(AUTH_ROUTE)} isDefault={isAuth}>
-          Вход
+          {t("Login")}
         </Button>
         <Button
           onClick={() => navigate(REGISTRATION_ROUTE)}
           isDefault={!isAuth}
         >
-          Регистрация
+          {t("Register")}
         </Button>
       </div>
-
+      <div></div>
       {match(isConfirm)
         .with(false, () => (
           <AuthForm
@@ -109,10 +109,7 @@ export const AuthWidget: React.FC = () => {
           ></ConfirmForm>
         ))
         .exhaustive()}
-      <Text style={{ textAlign: "center" }}>
-        Нажимая кнопку входа, вы принимаете условия Пользовательского соглашения
-        и Политики Конфиденциальности
-      </Text>
+      <Text style={{ textAlign: "center" }}>{t("AgreeMessage")}</Text>
     </div>
   );
 };

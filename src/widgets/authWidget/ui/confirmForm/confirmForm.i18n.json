@@ -1,0 +1,12 @@
+{
+  "confirmForm": {
+    "en": {
+      "next": "Next",
+      "sendCodeAgain": "Send the code again"
+    },
+    "ru": {
+      "next": "Далее",
+      "sendCodeAgain": "Отправить код повторно"
+    }
+  }
+}
